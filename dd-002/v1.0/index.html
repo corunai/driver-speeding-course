@@ -229,7 +229,7 @@ async function makePdf(){if(pdfBusy)return;pdfBusy=true;const r=S.record;r.pdf_a
   Hd('2. Course material (frozen at completion)');
   P('Learning objectives:',{bold:true});F.meta.objectives.forEach((o,i)=>P((i+1)+'. '+o,{ind:10}));
   for(const s of F.sections){if(y>520)np();P(s.title,{bold:true,size:12});
-   try{const png=await svgToPng(SVG[s.visual]);const ih=(W-2*M)*260/640;if(y+ih>740)np();d.addImage(png,'JPEG',M,y,W-2*M,ih,undefined,'FAST');y+=ih+8;}catch(e){P('[Illustration could not be embedded: '+e.message+']');}
+   try{const png=await svgToPng(SVG[s.visual]);const ih=(W-2*M)*260/640;if(y+ih>740)np();d.addImage(png,'JPEG',M,y,W-2*M,ih,undefined,'FAST');y+=ih+20;}catch(e){P('[Illustration could not be embedded: '+e.message+']');}
    s.blocks.forEach(([tag,txt,src])=>{P('['+tag+'] '+txt,{ind:6});if(src.length)P('Source: '+src.map(k=>F.src[k]).join('; '),{ind:16,size:8});});
    if(s.check)P('Optional knowledge check (ungraded): '+s.check.q+' Answer: '+s.check.choices[s.check.correct],{ind:6,size:9});}
   Hd('3. Narration transcript (as presented)');
