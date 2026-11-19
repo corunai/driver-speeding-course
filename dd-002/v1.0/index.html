@@ -131,7 +131,7 @@ function renderSection(){const s=SECTIONS[S.cur];if(audio){audio.pause();}
  h+='<button class="sec" id="prevB" '+(S.cur===0?'disabled':'')+'>&#9664; Previous</button> <button class="sec" id="nextB" '+(S.cur===SECTIONS.length-1?'disabled':'')+'>Next &#9654;</button>';
  $('secCard').innerHTML=h;
  // narration + captions
- audio=new Audio('audio/'+s.id+'.mp3');audio.preload='none';let cc=true;
+ audio=new Audio('audio/'+s.id+'.mp3');audio.preload='auto';let cc=true;audio.addEventListener('waiting',()=>{if(!audio.paused)$('cap').textContent='Loading narration...';});
  audio.addEventListener('timeupdate',()=>{const t=audio.currentTime;const c=CUES[s.id].cues.find(c=>t>=c[0]-0.05&&t<=c[1]+0.6);$('cap').textContent=c?c[2]:'';});
  audio.addEventListener('ended',()=>{$('playB').innerHTML='&#9654; Play narration';$('cap').textContent='(Narration finished)';});
  audio.addEventListener('error',()=>{$('cap').textContent='Narration audio could not load. All narration text is shown below and in the transcript.';});
